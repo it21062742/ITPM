@@ -16,6 +16,11 @@ const PORT = process.env.PORT || 5001;
 
 const URL = process.env.MONGODB_URL;
 
+//Add here the routers and paths --------------------------------------------------------------------------------------------------------------------------------
+const userRouter = require("./Routes/UserRoutes");
+
+
+
 //To say the for mongoose about the db URL link (I think) here we also give options if we have any
 mongoose.connect(URL);
 

@@ -2,18 +2,18 @@ import React, { Component, useState, useEffect } from "react";
 import axios from "axios";
 // import { useParams } from "react-router-dom";
 
-export default function GetEmployeeDetails() {
-  const [employee, setEmployee] = useState([]);
+export default function GetUserDetails() {
+  const [User, setUser] = useState([]);
   useEffect(() => {
     axios
-      .get("http://localhost:8070/employee/read")
+      .get("http://localhost:5001/User/read")
       .then((res) => {
-        setEmployee(res.data);
+        setUser(res.data);
       })
       .catch((err) => {
         console.log(err.message);
       });
   }, []);
 
-  return employee;
+  return User;
 }
