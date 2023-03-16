@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
 import GetEmployeeDetails from "./getAllEmployees";
+import { Link } from "react-router-dom";
 
 export default function LoginPage() {  
 	const [username, setEmail] = useState("");
@@ -127,7 +128,7 @@ export default function LoginPage() {
 							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2" onClick={Verify}>Login</button>
 							<span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
       <div><br></br>
-            <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Don't have an account?</span>
+            <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer" href="/SignUp">Don't have an account?</span>
 
       </div>
 		</form>
