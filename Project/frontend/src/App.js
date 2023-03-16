@@ -1,13 +1,31 @@
 import './App.css';
 import LoginPage from "./components/Login/Login.js";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import SighnUpPage from "./components/SighnUp/SignUp";
+import ArticlePage from "./components/Articles/Articles";
 
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
     <Router>
+
     <Routes>
       <Route path="/" element={<LoginPage />}></Route> //add as star
+      after
+    </Routes>
+
+    <Routes>
+      <Route path="/login" element={<LoginPage />}></Route> //add as star
+      after
+    </Routes>
+
+    <Routes>
+      <Route path="/SighnUp" element={<SighnUpPage />}></Route> //add as star
+      after
+    </Routes>
+
+    <Routes>
+      <Route path="/Album" element={<ArticlePage />}></Route> //add as star
       after
     </Routes>
   </Router>   

@@ -5,13 +5,13 @@ let User = require("../models/User");
 //Add a record to the database
 router.route("/create").post((req, res) => {
   const UserID = req.body.UserID;
-  const Username = req.body.Username;
+  const username = req.body.username;
   const password = req.body.password;
   const name = req.body.name;
 
   const newUser = new User({
     UserID,
-    Username,
+    username,
     password,
     name,
   });
@@ -19,7 +19,7 @@ router.route("/create").post((req, res) => {
   newUser
     .save()
     .then(() => {
-      res.json("New User Added");
+      res.json("New user Added");
     })
     .catch((err) => {
       console.log(err);
@@ -28,11 +28,11 @@ router.route("/create").post((req, res) => {
 
 //http://localhost:5001/User/read
 //Read data from the database
-//Display records of all Users
+//Display records of all User
 router.route("/read").get((req, res) => {
   User.find()
-    .then((Users) => {
-      res.json(Users);
+    .then((User) => {
+      res.json(User);
     })
     .catch((err) => {
       console.log(err);
@@ -64,11 +64,11 @@ router.route("/read/:id").get(async (req, res) => {
 //Update one record
 router.route("/update/:id").put(async (req, res) => {
   let UserId = req.params.id;
-  const { UserID, Username, password, name } = req.body;
+  const { UserID, username, password, name } = req.body;
 
   const updateUser = {
     UserID,
-    Username,
+    username,
     password,
     name,
   };
