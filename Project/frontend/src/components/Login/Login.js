@@ -1,91 +1,51 @@
 import React, { Component, useState } from "react";
 import axios from "axios";
-import GetEmployeeDetails from "./getAllEmployees";
 import { Link } from "react-router-dom";
+import Loader from "../Messages/Loader"
+import Error from "../Messages/Error";
 
 export default function LoginPage() {  
-	const [username, setEmail] = useState("");
-  const [email, setEmailCust] = useState("");
-  const [password, setPwd] = useState("");
+  //localStorage.setItem('currentUser',null)
+  const [email, setemail] = useState('')
+  const [password, setpassword] = useState('')
+  const [loading, setloading] = useState(false);
+  const [error, setError] = useState();
+  const [items, setItems] = useState([]);
+  async function Login() {
 
-  var allEmp = GetEmployeeDetails();
+    const user = {
 
-  const staff = {
-    username,
-    password,
-  };
+      email,
+      password,
 
-  const user = {
-    email,
-    password,
-  };
-
-  var i = 0;
-
-  async function Verify() {
-    try {
-      const result = await axios.post(
-        "http://localhost:5001/user/login",
-        {
-          staff,
-        }
-      );
-
-      if (result.data.message) {
-        /* Here we check if the user */
-        try {
-          const custResult = await axios.post(
-            "http://localhost:5001/user/login",
-            {
-              user,
-            }
-          );
-
-          if (custResult.data.message) {
-            localStorage.setItem("userType", "None");
-            alert("Incorrect UserName/Password");
-          } else {
-            console.log("Welcome User");
-            console.log(custResult.data);
-            localStorage.setItem("currentUser", JSON.stringify(result.data));
-
-            //setting the user type
-            localStorage.setItem("userType", "Customer");
-
-            localStorage.setItem(
-              "currentUserID",
-              JSON.stringify(custResult.data.email)
-            );
-            window.location.href = "/customerService";
-          }
-        } catch (error) {
-          console.log(error);
-        }
-      } else {
-        //checking if the user is an employee
-        localStorage.setItem("currentUser", JSON.stringify(result.data));
-
-        let loggedId = result.data.empID;
-
-        for (var k = 0; k < allEmp.length; k++) {
-          if (loggedId === allEmp[k].empID) break;
-        }
-
-        if (allEmp[k].designation.trim().slice(-7) === "Manager") {
-          console.log("Hello Manager");
-          window.location.href = "/Manager";
-        } else if (allEmp[k].designation.trim().slice(-5) === "Admin") {
-          console.log("Hello Admin");
-          window.location.href = "/admin";
-        } else {
-          console.log("Hello Employee");
-          window.location.href = "/Staff";
-        }
-        console.log(allEmp[k]);
-      }
-    } catch (error) {
-      console.log(error);
     }
+    try{
+      //console.log(user)
+      setloading(true)
+      const result = await axios.post("http://localhost:8070/login" ,{user})
+      console.log(result.data)
+      setloading(false)
+      if (result.data.message){
+        //console.log('login failed')
+        alert('Login failed')
+      }else{
+      localStorage.setItem('currentUser',JSON.stringify(result.data));
+       //localStorage.setItem('currentUser',1);
+
+      // JSON.parse(localStorage.getItem("currentUser"));
+      
+      
+     //<Navbar data={result.data}/> 
+      window.location.href = '/user/Album';
+
+      }
+    }catch (error){
+      console.log(error)
+      setloading(false)
+      setError(true)
+    }
+    console.log(user)
+    console.log('login success')
   }
 	
 	return (
@@ -111,9 +71,9 @@ export default function LoginPage() {
 					<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
 						clip-rule="evenodd" />
 				</svg>
-				<input class="pl-2 outline-none border-none" type="text" name="email" id="email" placeholder="User name" onChange={(e) => {
-                setEmail(e.target.value);
-                setEmailCust(e.target.value);
+				<input class="pl-2 outline-none border-none" type="email" name="email" id="email" placeholder="User name" value={email}
+              onChange={(e) => {
+                setemail(e.target.value)
               }} />
       </div>
 						<div class="flex items-center border-2 py-2 px-3 rounded-2xl">
@@ -123,10 +83,12 @@ export default function LoginPage() {
 									d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
 									clip-rule="evenodd" />
 							</svg>
-							<input class="pl-2 outline-none border-none" type="password" name="password" id="password" placeholder="Password" onChange={(e) => setPwd(e.target.value)}/>
+							<input class="pl-2 outline-none border-none" type="password" name="password" id="password" placeholder="Password"  value={password}
+              onChange={(e) => {
+                setpassword(e.target.value)
+              }}/>
       </div>
-							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2" onClick={Verify}>Login</button>
-							<span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
+							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2" onClick={Login}>Login</button>
       <div><br></br>
             <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer" href="/SignUp">Don't have an account?</span>
 

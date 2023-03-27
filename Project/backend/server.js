@@ -12,7 +12,7 @@ app.use(bodyParser.json({ limit: "30 mb", extended: true })); //sometimes we mig
 app.use(bodyParser.urlencoded({ limit: "30 mb", extended: true }));
 
 //pricess.env.PORT will allow us to choose the available port that is availabe once hosted
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 8070;
 
 const URL = process.env.MONGODB_URL;
 

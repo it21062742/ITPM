@@ -7,9 +7,7 @@ router.route("/create").post((req, res) => {
   const empID = req.body.empID;
   const name = req.body.empName;
   const designation = req.body.desig;
-  const deptName = req.body.deptName;
   const hourlyPay = Number(req.body.hourlyPay);
-  const otRate = Number(req.body.otRate);
   const NIC = req.body.NIC;
   const DOB = req.body.DOB;
   const gender = req.body.gender;
@@ -21,9 +19,7 @@ router.route("/create").post((req, res) => {
     empID,
     name,
     designation,
-    deptName,
     hourlyPay,
-    otRate,
     NIC,
     DOB,
     gender,
