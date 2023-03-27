@@ -1,41 +1,39 @@
-import './App.css';
+import "./App.css";
 import LoginPage from "./components/Login/Login.js";
-import SighnUpPage from "./components/SighnUp/SignUp";
 import ArticlePage from "./components/Articles/Articles";
-import RegisterScreen from "./components/SighnUp/RegisterScreen"
+import RegisterScreen from "./components/SighnUp/RegisterScreen";
+import ComplexNavbar from "./components/header-footer/header";
+import Footerbar from "./components/header-footer/footer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
-  return (
-    <Router>
+	return (
+		<Router>
+			<Routes>
+				<Route path="/" element={<LoginPage />}></Route>
+			</Routes>
 
-    <Routes>
-      <Route path="/" element={<LoginPage />}></Route> //add as star
-      after
-    </Routes>
+			<Routes>
+				<Route path="/login" element={<LoginPage />}></Route>
+			</Routes>
 
-    <Routes>
-      <Route path="/login" element={<LoginPage />}></Route> //add as star
-      after
-    </Routes>
+			<Routes>
+				<Route path="/nav" element={<ComplexNavbar />}></Route>
+			</Routes>
 
-    
-    <Routes>
-      <Route path="/reg" element={<RegisterScreen />}></Route> //add as star
-      after
-    </Routes>
+			<Routes>
+				<Route path="/foot" element={<Footerbar />}></Route>
+			</Routes>
 
-    <Routes>
-      <Route path="/SignUp" element={<SighnUpPage />}></Route> //add as star
-      after
-    </Routes>
+			<Routes>
+				<Route path="/reg" element={<RegisterScreen />}></Route>
+			</Routes>
 
-    <Routes>
-      <Route path="/Album" element={<ArticlePage />}></Route> //add as star
-      after
-    </Routes>
-  </Router>   
-  );
+			<Routes>
+				<Route path="/Album" element={<ArticlePage />}></Route>
+			</Routes>
+		</Router>
+	);
 }
 
 export default App;

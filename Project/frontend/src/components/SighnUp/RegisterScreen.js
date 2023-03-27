@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import Loader from "../Messages/Loader";
 import Error from "../Messages/Error";
 import Success from "../Messages/Success";
-const Swal = require("sweetalert2");
 
 export default function RegisterScreen() {
 	const [name, setname] = useState("");
@@ -29,12 +28,6 @@ export default function RegisterScreen() {
 				).data;
 				setloading(false);
 				setsuccess(true);
-
-				Swal.success({
-					text: "Do you want to continue",
-					icon: "success",
-					confirmButtonText: "Cool",
-				});
 
 				setname("");
 				setemail("");
