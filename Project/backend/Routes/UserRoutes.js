@@ -1,111 +1,59 @@
 const router = require("express").Router();
-let User = require("../models/User");
+let User = require('../models/User');
 
-//http://localhost:5001/User/create
-//Add a record to the database
-router.route("/create").post((req, res) => {
-  const UserID = req.body.UserID;
-  const username = req.body.username;
-  const password = req.body.password;
-  const name = req.body.name;
-
-  const newUser = new User({
-    UserID,
-    username,
-    password,
-    name,
-  });
-
-  newUser
-    .save()
-    .then(() => {
-      res.json("New user Added");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+router.post("/register",async(req,res)=>{
+    const newuser = new User(req.body)
+    try {
+        const user = await newuser.save()
+        res.send('User registered Successfully')
+    } catch (error) {
+        return res.status(400).json({error})
+    }
 });
 
-//http://localhost:5001/User/read
-//Read data from the database
-//Display records of all User
-router.route("/read").get((req, res) => {
-  User.find()
-    .then((User) => {
-      res.json(User);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
+router.post("/login",async(req,res)=>{
+    console.log(req.body)
+    const {email , password} = req.body.user
+    try {
+        
+        //console.log(email)
+        //console.log(password)
+        const user =await User.findOne({email : email, password :password})
+        
+        //console.log(user)
+        if(user){
+            const temp ={
+               name :user.name,
+               email : user.email,
+               isAdmin : user.isAdmin,
+               _id : user._id
+
+            }
+            res.send(temp) 
+            console.log(temp)
+        }
+        else{
+           // return res.status(400).json({message : 'login failed.'})
+            res.send({message: "Login failed"})
+        }
+    } catch (error) {
+       // return res.status(400).json({ error })
+            res.send({message:"User not found"})
+    }
+        
+        
+    }
+);
+
+router.get('/getallusers',async(req,res)=>{
+    try {
+        const users = await User.find();
+        res.send(users);
+    } catch (error) {
+        return res.status(400).json({error});
+    }
 });
 
-//http://localhost:5001/User/read/id
-//Read data from the database
-//Display recoords of one User
-router.route("/read/:id").get(async (req, res) => {
-  let UserId = req.params.id;
-
-  const User = await User.findById(UserId)
-    .then((User) => {
-      res.status(200).send({ status: "User Details Fetched", User });
-    })
-    .catch((err) => {
-      console.log(err.message);
-      res
-        .status(500)
-        .send({
-          status: "Error with fetching User details",
-          error: err.message,
-        });
-    });
-});
-
-//http://localhost:5001/User/update/id
-//Update one record
-router.route("/update/:id").put(async (req, res) => {
-  let UserId = req.params.id;
-  const { UserID, username, password, name } = req.body;
-
-  const updateUser = {
-    UserID,
-    username,
-    password,
-    name,
-  };
-
-  const update = await User.findByIdAndUpdate(UserId, updateUser)
-    .then(() => {
-      res.status(200).send({ status: "User Details Updated" });
-    })
-    .catch((err) => {
-      console.log(err);
-      res
-        .status(500)
-        .send({
-          status: "Error with updating User details",
-          error: err.message,
-        });
-    });
-});
-
-//http://localhost:5001/User/delete/id
-//Delete one record
-router.route("/delete/:id").delete(async (req, res) => {
-  let UserId = req.params.id;
-
-  await User.findByIdAndDelete(UserId)
-    .then(() => {
-      res.status(200).send({ status: "User  Details Deleted" });
-    })
-    .catch((err) => {
-      console.log(err.message);
-      res
-        .status(500)
-        .send({
-          status: "Error with deleting User details",
-          error: err.message,
-        });
-    });
-});
 
 module.exports = router;
+ 

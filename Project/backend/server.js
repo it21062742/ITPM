@@ -16,8 +16,18 @@ const PORT = process.env.PORT || 5001;
 
 const URL = process.env.MONGODB_URL;
 
-//Add here the routers and paths --------------------------------------------------------------------------------------------------------------------------------
-const userRouter = require("./Routes/UserRoutes");
+//Add here the routers and paths
+const userRouter = require("./routes/UserRoutes");
+const CustomerRouter = require("./routes/CustomerRoutes.js");
+const EmployeeRouter = require("./routes/EmployeeRoutes.js");
+const EmployeeLoginRouter = require("./routes/EmployeeLoginRoutes.js");
+const AdminRouter = require("./routes/AdminRoutes.js");
+
+
+//http://localhost:8070/employee
+app.use("/employee", EmployeeRouter);
+app.use("/employeelogin", EmployeeLoginRouter);
+app.use("/admin", AdminRouter);
 
 
 

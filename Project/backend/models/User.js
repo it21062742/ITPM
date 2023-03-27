@@ -2,28 +2,28 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-//USer (UserID, username, password, name)
 const UserSchema = new Schema({
-      UserID: {
+    name:{
         type: String,
         required: true,
-        unique: true,
-      },
-      username: {
-        type: String,
-        required: true,
-        unique: true,
-      },
-      password: {
-        type: String,
-        required: true,
-      },
-      name: {
-        type: String,
-        required: true,
-      },
-});
+    },
+    email:{
+        type:String,
+        required:true,
+    },
+    password:{ 
+        type:String,
+        required:true,
+    },
+    isAdmin :{
+        type:Boolean,
+        default:false,
+    }
+},{
+    timestamps :true
+})
 
-//model(tableName, schemaName)
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+// 1st parameter is table name & 2nd parameter is schema name given in line 6
+const userModel =mongoose.model("Users",UserSchema);
+
+module.exports = userModel;

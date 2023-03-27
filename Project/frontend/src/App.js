@@ -20,7 +20,7 @@ function App() {
     </Routes>
 
     <Routes>
-      <Route path="/SighnUp" element={<SighnUpPage />}></Route> //add as star
+      <Route path="/SignUp" element={<SighnUpPage />}></Route> //add as star
       after
     </Routes>
 
