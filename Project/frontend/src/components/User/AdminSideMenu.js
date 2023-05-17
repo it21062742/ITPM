@@ -25,7 +25,7 @@ export function AdminSideMenu(props) {
     >
       <div className="logo">
         <Link
-          to={"/"}
+          to={"/home"}
           style={{
             textDecoration: "none",
             color: "white",
@@ -35,7 +35,7 @@ export function AdminSideMenu(props) {
             justifyContent: "center",
           }}
         >
-          Heavenly
+          HelpMe
         </Link>
       </div>
       <div className="items">
@@ -197,3 +197,5 @@ export function AdminSideMenu(props) {
     </section>
   );
 }
+
+export default AdminSideMenu;

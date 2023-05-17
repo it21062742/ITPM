@@ -2,7 +2,8 @@ import './App.css';
 import LoginPage from "./components/Main/Login/Login.js";
 import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
-import AdminSideMenu from "./components/User/AdminSideMenu"
+import {AdminSideMenu}  from "./components/User/AdminSideMenu";
+
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -27,8 +28,9 @@ function App() {
     </Routes>
 
     <Routes>
-      <Route path="/side" element={<AdminSideMenu />}></Route> 
+      <Route path="/Home" element={<ArticlePage />}></Route> 
     </Routes>
+
 
   </Router>   
   );
