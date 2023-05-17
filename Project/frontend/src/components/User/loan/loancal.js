@@ -3,8 +3,13 @@ import LoanJS from "loanjs";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { Line } from "react-chartjs-2";
 import "./LoanCalculator.css";
+
+import LoanComparison from "./Bank"
+
 import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip } from 'chart.js'; 
 Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip);
+
+//var pref =require('./loan.html');
 
 // Create styles for PDF document
 const styles = StyleSheet.create({
@@ -263,6 +268,13 @@ export default function LoanCalculator() {
          
         </>
       )}
+      {/* <div className="external-html-container">
+        <iframe src="./loan.html" width="100%" height="auto"  title="External HTML" />
+      </div> */}
+      {/* <iframe src={pref}></iframe> */}
+  {/* <div className="external-html-container" dangerouslySetInnerHTML={{ pref }} />   */}
+      {<LoanComparison />}
     </div>
+
   );
 }
