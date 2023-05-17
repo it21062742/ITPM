@@ -122,27 +122,29 @@ export default function LoanCalculator() {
       ))}
     </View>
   );
-
-  const interestData = installments.map((i) => i.interest);
-  const capitalData = installments.map((i) => i.capital);
+  const totalInterestData = installments.map((i) => i.capital);
+  const totalRemainingData = installments.map((i) => i.remain);
   const chartData = {
     labels: Array.from({ length: installments.length }, (_, i) => i),
     datasets: [
       {
-        label: "Interest",
-        data: interestData,
+        label: "Total Interest Paid",
+        data: totalInterestData,
         borderColor: "rgba(255, 99, 132, 1)",
         backgroundColor: "rgba(255, 99, 132, 0.2)",
         borderDash: [5, 5],
+        borderWidth: 5
       },
       {
-        label: "Capital",
-        data: capitalData,
+        label: "Total Remaining Amount",
+        data: totalRemainingData,
         borderColor: "rgba(54, 162, 235, 1)",
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderDash: [5, 5],
+        borderWidth: 5
       },
     ],
+  
   };
   const chartOptions = {
     scales: {
@@ -207,8 +209,8 @@ export default function LoanCalculator() {
 
       {installments.length > 0 && (
         <>
-          {renderTable()}
-          <Line data={chartData} options={chartOptions} />
+          
+         
           <PDFDownloadLink
             document={
               <Document>
@@ -225,6 +227,8 @@ export default function LoanCalculator() {
               loading ? "Loading document..." : "Download PDF"
             }
           </PDFDownloadLink>
+          {renderTable()}
+          <Line data={chartData} options={chartOptions} />
         </>
       )}
     </div>

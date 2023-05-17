@@ -7,6 +7,9 @@
 
 .loan-download-container {
   text-align: right;
+  padding-top: 50px;
+  padding-bottom: 50px;
+
 }
 
 .form-item {
@@ -57,6 +60,9 @@
 table {
   width: 100%;
   border-spacing: 0;
+  border-top: 40px;
+  padding-bottom: 50px;
+
 }
 
 th, td {

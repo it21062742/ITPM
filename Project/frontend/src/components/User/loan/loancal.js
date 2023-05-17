@@ -3,8 +3,8 @@ import LoanJS from "loanjs";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
 import { Line } from "react-chartjs-2";
 import "./LoanCalculator.css";
-import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js'; 
-Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip } from 'chart.js'; 
+Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale, Tooltip);
 
 // Create styles for PDF document
 const styles = StyleSheet.create({
@@ -34,6 +34,10 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderLeftWidth: 0,
     borderTopWidth: 0,
+  },
+  chartContainer: {
+    width: "50%",
+    marginRight: "10px",
   },
 });
 
@@ -123,28 +127,47 @@ export default function LoanCalculator() {
     </View>
   );
 
-  const interestData = installments.map((i) => i.interest);
-  const capitalData = installments.map((i) => i.capital);
+  // graph
+  const cumulativePrincipalData = installments.reduce((acc, i) => {
+    const previousPrincipal = acc.length > 0 ? acc[acc.length - 1] : 0;
+    const cumulativePrincipal = previousPrincipal + i.capital;
+    return [...acc, cumulativePrincipal];
+  }, []);
+  const totalRemainingData = installments.map((i) => i.remain);
+  
+  
   const chartData = {
     labels: Array.from({ length: installments.length }, (_, i) => i),
     datasets: [
       {
-        label: "Interest",
-        data: interestData,
-        borderColor: "rgba(255, 99, 132, 1)",
-        backgroundColor: "rgba(255, 99, 132, 0.2)",
-        borderDash: [5, 5],
-      },
-      {
-        label: "Capital",
-        data: capitalData,
+        label: "Total Remaining Amount",
+        data: totalRemainingData,
         borderColor: "rgba(54, 162, 235, 1)",
         backgroundColor: "rgba(54, 162, 235, 0.2)",
         borderDash: [5, 5],
+        borderWidth: 5, // Make the bar line thicker
+      },
+      {
+        label: "Cumulative Principal",
+        data: cumulativePrincipalData,
+        borderColor: "rgba(75, 192, 192, 1)",
+        backgroundColor: "rgba(75, 192, 192, 0.2)",
+        borderDash: [5, 5],
+        borderWidth: 5, // Make the bar line thicker
       },
     ],
   };
+  
   const chartOptions = {
+    responsive: true, // Make the graph responsive
+    plugins: {
+      tooltip: {
+        enabled: true, // Enable tooltips on hover
+        callbacks: {
+          label: (context) => amountFormat(context.raw), // Format tooltip label
+        },
+      },
+    },
     scales: {
       y: {
         beginAtZero: true,
@@ -154,13 +177,15 @@ export default function LoanCalculator() {
       },
     },
   };
+    
 
   return (
     <div className="loan-calculator-container">
       <h1>Loan Calculator</h1>
 
+      <div className="flex-container">
       <form onSubmit={handleSubmit}>
-      <div className="form-item">
+        <div className="form-item">
           <label htmlFor="loan-amount">Loan Amount</label>
           <div className="form-input">
             <input
@@ -193,6 +218,7 @@ export default function LoanCalculator() {
               placeholder="0"
               value={values["loan-term"]}
               onChange={handleInputChange}
+              required
             />
           </div>
         </div>
@@ -204,16 +230,23 @@ export default function LoanCalculator() {
           ></input>
         </div>
       </form>
-
+      {installments.length > 0 && (
+          <div className="chart-container">
+            <Line data={chartData} options={chartOptions} />
+          </div>
+        )}
+      </div>
       {installments.length > 0 && (
         <>
-          {renderTable()}
-          <Line data={chartData} options={chartOptions} />
+         <div className="loan-download-container">
           <PDFDownloadLink
             document={
               <Document>
                 <Page size="A4" style={styles.page}>
                   <Text style={styles.header}>Loan Installments</Text>
+                  <View style={styles.chartContainer}>
+                    <Line data={chartData} options={chartOptions} />
+                  </View>
                   {renderPDFTable()}
                 </Page>
               </Document>
@@ -225,6 +258,9 @@ export default function LoanCalculator() {
               loading ? "Loading document..." : "Download PDF"
             }
           </PDFDownloadLink>
+          </div>
+          {renderTable()}
+         
         </>
       )}
     </div>
