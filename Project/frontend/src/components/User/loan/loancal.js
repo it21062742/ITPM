@@ -1,8 +1,10 @@
 import React, { useState, useRef } from "react";
 import LoanJS from "loanjs";
 import { PDFDownloadLink, Document, Page, Text, View, StyleSheet } from "@react-pdf/renderer";
+import { Line } from "react-chartjs-2";
 import "./LoanCalculator.css";
-import DownloadForOfflineIcon from '@mui/icons-material/DownloadForOffline';
+import { Chart, LineController, LineElement, PointElement, LinearScale, Title,CategoryScale } from 'chart.js'; 
+Chart.register(LineController, LineElement, PointElement, LinearScale, Title, CategoryScale);
 
 // Create styles for PDF document
 const styles = StyleSheet.create({
@@ -17,7 +19,7 @@ const styles = StyleSheet.create({
     display: "table",
     width: "100%",
     borderStyle: "solid",
-    borderWidth: 2,
+    borderWidth: 1,
     borderRightWidth: 0,
     borderBottomWidth: 0,
   },
@@ -37,9 +39,9 @@ const styles = StyleSheet.create({
 
 export default function LoanCalculator() {
   const [values, setValues] = useState({
-    "loan-amount": 0,
-    "loan-term": 0,
-    "interest-rate": 0,
+    "loan-amount": 1000,
+    "loan-term": 0.5,
+    "interest-rate": 3,
   });
   const [installments, setInstallments] = useState([]);
   const pdfRef = useRef();
@@ -72,7 +74,7 @@ export default function LoanCalculator() {
   const amountFormat = (amount) =>
     new Intl.NumberFormat("en-US", {
       style: "currency",
-      currency: "USD",
+      currency: "LKR",
     }).format(amount);
 
   const renderTable = () => (
@@ -111,7 +113,7 @@ export default function LoanCalculator() {
       </View>
       {installments.map((i, ind) => (
         <View key={ind} style={styles.tableRow}>
-          <Text style={styles.tableCell}>{ind+1}</Text>
+          <Text style={styles.tableCell}>{ind}</Text>
           <Text style={styles.tableCell}>{amountFormat(i.installment)}</Text>
           <Text style={styles.tableCell}>{amountFormat(i.interest)}</Text>
           <Text style={styles.tableCell}>{amountFormat(i.capital)}</Text>
@@ -120,6 +122,38 @@ export default function LoanCalculator() {
       ))}
     </View>
   );
+
+  const interestData = installments.map((i) => i.interest);
+  const capitalData = installments.map((i) => i.capital);
+  const chartData = {
+    labels: Array.from({ length: installments.length }, (_, i) => i),
+    datasets: [
+      {
+        label: "Interest",
+        data: interestData,
+        borderColor: "rgba(255, 99, 132, 1)",
+        backgroundColor: "rgba(255, 99, 132, 0.2)",
+        borderDash: [5, 5],
+      },
+      {
+        label: "Capital",
+        data: capitalData,
+        borderColor: "rgba(54, 162, 235, 1)",
+        backgroundColor: "rgba(54, 162, 235, 0.2)",
+        borderDash: [5, 5],
+      },
+    ],
+  };
+  const chartOptions = {
+    scales: {
+      y: {
+        beginAtZero: true,
+        ticks: {
+          callback: (value) => amountFormat(value),
+        },
+      },
+    },
+  };
 
   return (
     <div className="loan-calculator-container">
@@ -170,11 +204,11 @@ export default function LoanCalculator() {
           ></input>
         </div>
       </form>
-      
+
       {installments.length > 0 && (
         <>
-        <div className="loan-download-container">
-         <DownloadForOfflineIcon />
+          {renderTable()}
+          <Line data={chartData} options={chartOptions} />
           <PDFDownloadLink
             document={
               <Document>
@@ -191,12 +225,8 @@ export default function LoanCalculator() {
               loading ? "Loading document..." : "Download PDF"
             }
           </PDFDownloadLink>
-          </div>
-          {renderTable()}
         </>
       )}
     </div>
-        
-
   );
 }
