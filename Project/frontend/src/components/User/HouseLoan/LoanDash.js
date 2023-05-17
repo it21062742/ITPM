@@ -1,3 +1,7 @@
+/**
+ * This is a React component that renders a dashboard with a drawer and a Loan Calculator component.
+ * @returns The `LoanDash` component is being returned.
+ */
 import * as React from 'react';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';

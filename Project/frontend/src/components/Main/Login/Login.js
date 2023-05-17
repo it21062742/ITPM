@@ -1,3 +1,10 @@
+/**
+ * This is a React component for a login page that allows users to log in as either a staff member or a
+ * customer and redirects them to different pages based on their user type.
+ * @returns A functional component for a login page with JSX elements and state variables for username,
+ * email, and password. It also includes an axios post request to verify user login credentials and
+ * redirects the user to different pages based on their user type.
+ */
 import React, { Component, useState } from "react";
 import axios from "axios";
 import GetEmployeeDetails from "./getAllEmployees";

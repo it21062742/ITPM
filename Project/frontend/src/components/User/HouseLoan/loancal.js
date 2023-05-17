@@ -46,6 +46,11 @@ const styles = StyleSheet.create({
   },
 });
 
+/**
+ * The LoanCalculator function calculates loan installments and displays them in a table and graph,
+ * with the option to download a PDF, and includes a form for inputting loan details.
+ * @returns The `LoanCalculator` component is being returned.
+ */
 export default function LoanCalculator() {
   const [values, setValues] = useState({
     "loan-amount": 1000,

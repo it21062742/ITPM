@@ -1,3 +1,6 @@
+/* This line of code is importing the React library, as well as the Component and useState modules from
+the "react" package. This allows the code to use React components and state management
+functionality. */
 import React, { Component, useState } from "react";
 import axios from "axios";
 import GetEmployeeDetails from "./getAllEmployees";

@@ -1,3 +1,15 @@
+/**
+ * The above function is a React component that renders a sign-up form with fields for first name, last
+ * name, email, password, and a checkbox for receiving promotional emails.
+ * @param props - The `props` parameter in the `Copyright` function is an object that contains any
+ * props passed down to the component when it is used. In this case, it is used to pass down the
+ * `variant`, `color`, and `align` props to the `Typography` component.
+ * @returns The code is exporting a functional component called `SignUp` which returns a form for user
+ * sign up. The form includes fields for first name, last name, email, password, and a checkbox for
+ * receiving promotional emails. The form also includes a submit button and a link to the login page.
+ * The component is wrapped in a `ThemeProvider` and includes some MUI components such as `Avatar`,
+ * `Button
+ */
 import * as React from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';

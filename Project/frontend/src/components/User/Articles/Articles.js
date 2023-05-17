@@ -1,3 +1,11 @@
+/**
+ * The function displays a webpage with a grid of cards containing information about saving money and a
+ * button to view more details.
+ * @returns The `Album` component is being returned, which renders a page with a header, a hero unit
+ * with a title, and a grid of cards. Each card displays an image, a title, and a "View" button that
+ * redirects to a webpage when clicked. The `cards` array is used to generate the grid of cards using
+ * the `map` function.
+ */
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
