@@ -4,8 +4,8 @@ import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
 import Dashboard from './components/dashboard/Dashboard';
 import Articlesdash from './components/User/Articles/Articlesdash';
-import LoanCal from './components/User/loan/loancal';
-import LoanDash from './components/User/loan/LoanDash';
+import LoanCal from './components/User/HouseLoan/loancal';
+import LoanDash from './components/User/HouseLoan/LoanDash';
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
