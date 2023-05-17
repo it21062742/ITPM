@@ -1,33 +1,35 @@
 import './App.css';
-import LoginPage from "./components/Login/Login.js";
-import SighnUpPage from "./components/SighnUp/SignUp";
-import ArticlePage from "./components/Articles/Articles";
+import LoginPage from "./components/Main/Login/Login.js";
+import SighnUpPage from "./components/Main/SighnUp/SignUp";
+import ArticlePage from "./components/User/Articles/Articles";
+import AdminSideMenu from "./components/User/AdminSideMenu"
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
   return (
+    
     <Router>
-
     <Routes>
-      <Route path="/" element={<LoginPage />}></Route> //add as star
-      after
+      <Route path="/" element={<LoginPage />}></Route> 
     </Routes>
 
     <Routes>
-      <Route path="/login" element={<LoginPage />}></Route> //add as star
-      after
+      <Route path="/login" element={<LoginPage />}></Route> 
     </Routes>
 
     <Routes>
-      <Route path="/SignUp" element={<SighnUpPage />}></Route> //add as star
-      after
+      <Route path="/SignUp" element={<SighnUpPage />}></Route> 
     </Routes>
 
     <Routes>
-      <Route path="/Album" element={<ArticlePage />}></Route> //add as star
-      after
+      <Route path="/Album" element={<ArticlePage />}></Route> 
     </Routes>
+
+    <Routes>
+      <Route path="/side" element={<AdminSideMenu />}></Route> 
+    </Routes>
+
   </Router>   
   );
 }
