@@ -3,6 +3,10 @@ import LoginPage from "./components/Main/Login/Login.js";
 import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
 import {AdminSideMenu}  from "./components/User/AdminSideMenu";
+import Dashboard from './components/dashboard/Dashboard';
+import Articlesdash from './components/User/Articles/Articlesdash';
+import LoanCal from './components/User/loan/loancal';
+import LoanDash from './components/User/loan/LoanDash';
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -29,6 +33,18 @@ function App() {
 
     <Routes>
       <Route path="/Home" element={<ArticlePage />}></Route> 
+    </Routes>
+
+    <Routes>
+      <Route path="/dash" element={<Dashboard />}></Route> 
+    </Routes>
+
+    <Routes>
+      <Route path="/1" element={<Articlesdash />}></Route> 
+    </Routes>
+
+     <Routes>
+      <Route path="/Loancal" element={<LoanDash />}></Route> 
     </Routes>
 
 
