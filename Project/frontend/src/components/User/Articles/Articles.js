@@ -1,7 +1,6 @@
 import * as React from 'react';
 import AppBar from '@mui/material/AppBar';
 import Button from '@mui/material/Button';
-import CameraIcon from '@mui/icons-material/PhotoCamera';
 import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
@@ -14,13 +13,17 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
-const i =1;
+const i = 1;
 
 const theme = createTheme();
 
 export default function Album() {
+  const handleViewClick = () => {
+    // Redirect to another webpage
+    window.location.href = 'https://www.regions.com/insights/personal/personal-finances/budgeting-and-saving/10-best-ways-to-save-money';
+  };
+
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
@@ -68,11 +71,13 @@ export default function Album() {
 
                   <CardContent sx={{ flexGrow: 1 }}>
                     <Typography gutterBottom variant="h5">
-                      Easy and effective ways to save money 
+                      Easy and effective ways to save money
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button fullWidth>View</Button>
+                    <Button fullWidth onClick={handleViewClick}>
+                      View
+                    </Button>
                   </CardActions>
                 </Card>
               </Grid>
@@ -80,8 +85,6 @@ export default function Album() {
           </Grid>
         </Container>
       </main>
-
-
     </ThemeProvider>
   );
 }

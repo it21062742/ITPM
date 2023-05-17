@@ -2,7 +2,6 @@ import './App.css';
 import LoginPage from "./components/Main/Login/Login.js";
 import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
-import {AdminSideMenu}  from "./components/User/AdminSideMenu";
 import Dashboard from './components/dashboard/Dashboard';
 import Articlesdash from './components/User/Articles/Articlesdash';
 import LoanCal from './components/User/loan/loancal';
