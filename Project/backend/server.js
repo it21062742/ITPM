@@ -12,21 +12,17 @@ app.use(bodyParser.json({ limit: "30 mb", extended: true })); //sometimes we mig
 app.use(bodyParser.urlencoded({ limit: "30 mb", extended: true }));
 
 //pricess.env.PORT will allow us to choose the available port that is availabe once hosted
-const PORT = process.env.PORT || 5001;
+const PORT = process.env.PORT || 5000;
 
 const URL = process.env.MONGODB_URI;
 
 //Add here the routers and paths
 const userRouter = require("./routes/UserRoutes");
-const CustomerRouter = require("./routes/CustomerRoutes.js");
-const EmployeeRouter = require("./routes/EmployeeRoutes.js");
-const EmployeeLoginRouter = require("./routes/EmployeeLoginRoutes.js");
 const AdminRouter = require("./routes/AdminRoutes.js");
 
 
-//http://localhost:8070/employee
-app.use("/employee", EmployeeRouter);
-app.use("/employeelogin", EmployeeLoginRouter);
+//http://localhost:5000/employee
+app.use("/user", userRouter);
 app.use("/admin", AdminRouter);
 
 
@@ -51,7 +47,7 @@ app.listen(PORT, () => {
 const router = express.Router();
 
 //parking management controllers
-router.get("/", (req, res) => {
+router.get("/test", (req, res) => {
   res.json({ message: "Test me" });
   console.log("hello");
 });

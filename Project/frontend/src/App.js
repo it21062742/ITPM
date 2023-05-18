@@ -1,5 +1,5 @@
 import './App.css';
-import LoginPage from "./components/Main/Login/Login.js";
+import LoginPage from "./components/Main/SighnUp/Login.js";
 import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
 import Dashboard from './components/dashboard/Dashboard';

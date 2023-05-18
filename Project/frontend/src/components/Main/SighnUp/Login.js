@@ -3,7 +3,6 @@ the "react" package. This allows the code to use React components and state mana
 functionality. */
 import React, { Component, useState } from "react";
 import axios from "axios";
-import GetEmployeeDetails from "./getAllEmployees";
 
 export default function LoginPage() {  return (
     <div class="h-screen md:flex">
@@ -40,7 +39,6 @@ export default function LoginPage() {  return (
 							<input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Password" />
       </div>
 							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
-							<span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Forgot Password ?</span>
       <div><br></br>
             <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Don't have an account?</span>
 

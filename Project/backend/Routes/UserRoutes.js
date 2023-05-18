@@ -1,59 +1,94 @@
-const router = require("express").Router();
-let User = require('../models/User');
+const express = require("express");
+const router = express.Router();
+const userModel = require("../models/User");
 
-router.post("/register",async(req,res)=>{
-    const newuser = new User(req.body)
-    try {
-        const user = await newuser.save()
-        res.send('User registered Successfully')
-    } catch (error) {
-        return res.status(400).json({error})
-    }
+// GET all users
+router.get("/", async (req, res) => {
+  try {
+    const users = await userModel.find();
+    res.json(users);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
-router.post("/login",async(req,res)=>{
-    console.log(req.body)
-    const {email , password} = req.body.user
-    try {
-        
-        //console.log(email)
-        //console.log(password)
-        const user =await User.findOne({email : email, password :password})
-        
-        //console.log(user)
-        if(user){
-            const temp ={
-               name :user.name,
-               email : user.email,
-               isAdmin : user.isAdmin,
-               _id : user._id
-
-            }
-            res.send(temp) 
-            console.log(temp)
-        }
-        else{
-           // return res.status(400).json({message : 'login failed.'})
-            res.send({message: "Login failed"})
-        }
-    } catch (error) {
-       // return res.status(400).json({ error })
-            res.send({message:"User not found"})
-    }
-        
-        
-    }
-);
-
-router.get('/getallusers',async(req,res)=>{
-    try {
-        const users = await User.find();
-        res.send(users);
-    } catch (error) {
-        return res.status(400).json({error});
-    }
+// GET a specific user by ID
+router.get("/:id", async (req, res) => {
+  try {
+    const user = await userModel.findById(req.params.id);
+    res.json(user);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
 });
 
+// POST a new user
+router.post("/", async (req, res) => {
+  try {
+    const { name, email, password, isAdmin } = req.body;
+    const newUser = new userModel({
+      name,
+      email,
+      password,
+      isAdmin,
+    });
+    const savedUser = await newUser.save();
+    res.json(savedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// UPDATE a user by ID
+router.put("/:id", async (req, res) => {
+  try {
+    const { name, email, password, isAdmin } = req.body;
+    const updatedUser = await userModel.findByIdAndUpdate(
+      req.params.id,
+      { name, email, password, isAdmin },
+      { new: true }
+    );
+    res.json(updatedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// DELETE a user by ID
+router.delete("/:id", async (req, res) => {
+  try {
+    const deletedUser = await userModel.findByIdAndDelete(req.params.id);
+    res.json(deletedUser);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// Register a new user
+router.post("/register", async (req, res) => {
+    try {
+      const { name, email, password } = req.body;
+  
+      // Check if the user already exists
+      const existingUser = await userModel.findOne({ email });
+      if (existingUser) {
+        return res.status(400).json({ error: "User already exists" });
+      }
+  
+      // Create a new user
+      const newUser = new userModel({
+        name,
+        email,
+        password,
+      });
+  
+      // Save the user to the database
+      const savedUser = await newUser.save();
+  
+      res.json(savedUser);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  });
 
 module.exports = router;
- 
