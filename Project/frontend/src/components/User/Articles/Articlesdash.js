@@ -9,12 +9,11 @@ import List from '@mui/material/List';
 import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
-import Badge from '@mui/material/Badge';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
-import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems } from '../../dashboard/listItems';
 import Album from "./Articles.js"
+import LogoutIcon from '@mui/icons-material/Logout';
 
 const drawerWidth = 240;
 
@@ -35,6 +34,12 @@ const AppBar = styled(MuiAppBar, {
     }),
   }),
 }));
+
+//logout
+const logOut = () => {
+  window.localStorage.clear();
+  window.location.href = "./login";
+};
 
 const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
@@ -102,10 +107,8 @@ export default function Articlesdash() {
             >
               HelpMe
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
+            <IconButton color="inherit" onClick={logOut}>
+                <LogoutIcon />
             </IconButton>
           </Toolbar>
         </AppBar>

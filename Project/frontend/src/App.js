@@ -6,44 +6,31 @@ import Dashboard from './components/dashboard/Dashboard';
 import Articlesdash from './components/User/Articles/Articlesdash';
 import LoanCal from './components/User/HouseLoan/loancal';
 import LoanDash from './components/User/HouseLoan/LoanDash';
+import UserDetails from "./components/User/userDetails";
+import HomePage from './components/Main/LandingPage/HomePage';
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 function App() {
+  const isLoggedIn = window.localStorage.getItem("loggedIn");
   return (
-    
     <Router>
     <Routes>
-      <Route path="/" element={<LoginPage />}></Route> 
-    </Routes>
-
-    <Routes>
+    <Route
+            exact
+            path="/"
+            element={isLoggedIn == "true" ? <UserDetails /> : <HomePage />}
+          />
+      <Route path="/" element={<HomePage />}></Route> 
       <Route path="/login" element={<LoginPage />}></Route> 
-    </Routes>
-
-    <Routes>
       <Route path="/SignUp" element={<SighnUpPage />}></Route> 
-    </Routes>
-
-    <Routes>
       <Route path="/Album" element={<ArticlePage />}></Route> 
-    </Routes>
-
-    <Routes>
       <Route path="/Home" element={<ArticlePage />}></Route> 
-    </Routes>
-
-    <Routes>
       <Route path="/dash" element={<Dashboard />}></Route> 
-    </Routes>
-
-    <Routes>
       <Route path="/1" element={<Articlesdash />}></Route> 
-    </Routes>
-
-     <Routes>
       <Route path="/Loancal" element={<LoanDash />}></Route> 
+      <Route path='/userDetails'element={<userDetails />}></Route>
     </Routes>
 
 

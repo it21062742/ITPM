@@ -3,7 +3,7 @@ import React, { Component, useEffect, useState } from "react";
 export default function UserHome({ userData }) {
   const logOut = () => {
     window.localStorage.clear();
-    window.location.href = "./sign-in";
+    window.location.href = "./login";
   };
   return (
     <div className="auth-wrapper">

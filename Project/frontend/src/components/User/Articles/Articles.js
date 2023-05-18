@@ -31,6 +31,7 @@ export default function Album() {
     // Redirect to another webpage
     window.location.href = 'https://www.regions.com/insights/personal/personal-finances/budgeting-and-saving/10-best-ways-to-save-money';
   };
+  
 
   return (
     <ThemeProvider theme={theme}>
