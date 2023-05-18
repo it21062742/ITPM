@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ limit: "30 mb", extended: true }));
 //pricess.env.PORT will allow us to choose the available port that is availabe once hosted
 const PORT = process.env.PORT || 5001;
 
-const URL = process.env.MONGODB_URL;
+const URL = process.env.MONGODB_URI;
 
 //Add here the routers and paths
 const userRouter = require("./routes/UserRoutes");
