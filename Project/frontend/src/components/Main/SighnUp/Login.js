@@ -2,9 +2,15 @@
 the "react" package. This allows the code to use React components and state management
 functionality. */
 import React, { Component, useState } from "react";
+import Link from '@mui/material/Link';
+
+
+
 import axios from "axios";
 
-export default function LoginPage() {  return (
+export default function LoginPage() {  
+
+	return (
     <div class="h-screen md:flex">
 	<div
 		class="relative overflow-hidden md:flex w-1/2 bg-gradient-to-tr from-blue-800 to-purple-700 i justify-around items-center hidden">
@@ -40,11 +46,15 @@ export default function LoginPage() {  return (
       </div>
 							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
       <div><br></br>
-            <span class="text-sm ml-2 hover:text-blue-500 cursor-pointer">Don't have an account?</span>
+	  <Link href="/signup" variant="body2">
+                  Don't have an account?
+                </Link>
 
       </div>
 		</form>
 	</div>
 </div>
+
+
   );
 }

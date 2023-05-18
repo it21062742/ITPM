@@ -6,6 +6,8 @@ import Dashboard from './components/dashboard/Dashboard';
 import Articlesdash from './components/User/Articles/Articlesdash';
 import LoanCal from './components/User/HouseLoan/loancal';
 import LoanDash from './components/User/HouseLoan/LoanDash';
+import Login from "./components/Main/SighnUp/T1"
+import Register from "./components/Main/SighnUp/T2"
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -14,6 +16,16 @@ function App() {
   return (
     
     <Router>
+
+      {/* test */}
+      <Routes>
+      <Route path="/t1" element={<Login />}></Route> 
+    </Routes>
+    <Routes>
+      <Route path="/t1" element={<Register />}></Route> 
+    </Routes>
+
+      {/* end test */}
     <Routes>
       <Route path="/" element={<LoginPage />}></Route> 
     </Routes>
