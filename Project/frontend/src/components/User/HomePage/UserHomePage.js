@@ -1,11 +1,18 @@
 import * as React from "react";
 import { styled, createTheme, ThemeProvider } from "@mui/material/styles";
 import CssBaseline from "@mui/material/CssBaseline";
+import MuiDrawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import MuiAppBar from "@mui/material/AppBar";
 import Toolbar from "@mui/material/Toolbar";
+import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+import MenuIcon from "@mui/icons-material/Menu";
+import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import { mainListItems } from "../../dashboard/listItems";
+import Home from "./HomePageLayout";
 import LogoutIcon from "@mui/icons-material/Logout";
 
 const drawerWidth = 240;
@@ -28,11 +35,37 @@ const AppBar = styled(MuiAppBar, {
 	}),
 }));
 
-// Logout
+//logout
 const logOut = () => {
 	window.localStorage.clear();
 	window.location.href = "./login";
 };
+
+const Drawer = styled(MuiDrawer, {
+	shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }) => ({
+	"& .MuiDrawer-paper": {
+		position: "relative",
+		whiteSpace: "nowrap",
+		width: drawerWidth,
+		transition: theme.transitions.create("width", {
+			easing: theme.transitions.easing.sharp,
+			duration: theme.transitions.duration.enteringScreen,
+		}),
+		boxSizing: "border-box",
+		...(!open && {
+			overflowX: "hidden",
+			transition: theme.transitions.create("width", {
+				easing: theme.transitions.easing.sharp,
+				duration: theme.transitions.duration.leavingScreen,
+			}),
+			width: theme.spacing(7),
+			[theme.breakpoints.up("sm")]: {
+				width: theme.spacing(9),
+			},
+		}),
+	},
+}));
 
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
@@ -44,7 +77,7 @@ export default function Articlesdash() {
 	};
 
 	return (
-		<ThemeProvider theme={defaultTheme}>
+		<Box sx={{ display: "flex" }}>
 			<CssBaseline />
 			<AppBar position="absolute">
 				<Toolbar
@@ -52,6 +85,16 @@ export default function Articlesdash() {
 						pr: "24px", // keep right padding when drawer closed
 					}}
 				>
+					<IconButton
+						edge="start"
+						color="inherit"
+						aria-label="open drawer"
+						onClick={toggleDrawer}
+						sx={{
+							marginRight: "36px",
+							...(open && { display: "none" }),
+						}}
+					></IconButton>
 					<Typography
 						component="h1"
 						variant="h6"
@@ -66,19 +109,20 @@ export default function Articlesdash() {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
-			<Box sx={{ display: "flex" }}>
-				<Box sx={{ width: "50%", p: 2 }}>
-					{/* Add your first box content here */}
-					<img src="image1.jpg" alt="Image 1" />
-					<button>Button 1</button>
-					<text>aaa</text>
-				</Box>
-				<Box sx={{ width: "50%", p: 2 }}>
-					{/* Add your second box content here */}
-					<img src="image2.jpg" alt="Image 2" />
-					<button>Button 2</button>
-				</Box>
+			<Box
+				component="main"
+				sx={{
+					backgroundColor: (theme) =>
+						theme.palette.mode === "light"
+							? theme.palette.grey[100]
+							: theme.palette.grey[900],
+					flexGrow: 1,
+					height: "100vh",
+					overflow: "auto",
+				}}
+			>
+				{<Home />}
 			</Box>
-		</ThemeProvider>
+		</Box>
 	);
 }
