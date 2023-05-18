@@ -56,7 +56,6 @@ body {
 .hero_area {
   height: 75vh;
   background-image: url(../images/hero-bg.jpg);
-  
   background-size: cover;
   display: -webkit-box;
   display: -ms-flexbox;

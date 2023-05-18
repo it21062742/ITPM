@@ -29,11 +29,9 @@ export default function LoginPage() {
 		.then((data) => {
 		  console.log(data, "userRegister");
 		  if (data.status == "ok") {
-			alert("login successful");
 			window.localStorage.setItem("token", data.data);
 			window.localStorage.setItem("loggedIn", true);
-  
-			window.location.href = "./userDetails";
+			window.location.href = "./home";
 		  }
 		});
 	}

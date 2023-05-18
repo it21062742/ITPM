@@ -8,6 +8,7 @@ import LoanCal from './components/User/HouseLoan/loancal';
 import LoanDash from './components/User/HouseLoan/LoanDash';
 import UserDetails from "./components/User/userDetails";
 import HomePage from './components/Main/LandingPage/HomePage';
+import UserHomePage from './components/User/UserHomePage';
 
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
@@ -20,17 +21,18 @@ function App() {
     <Route
             exact
             path="/"
-            element={isLoggedIn == "true" ? <UserDetails /> : <HomePage />}
+            element={isLoggedIn == "true" ? <UserDetails /> : <UserHomePage />}
           />
       <Route path="/" element={<HomePage />}></Route> 
       <Route path="/login" element={<LoginPage />}></Route> 
       <Route path="/SignUp" element={<SighnUpPage />}></Route> 
       <Route path="/Album" element={<ArticlePage />}></Route> 
-      <Route path="/Home" element={<ArticlePage />}></Route> 
+      <Route path="/Home" element={<UserHomePage />}></Route> 
       <Route path="/dash" element={<Dashboard />}></Route> 
       <Route path="/1" element={<Articlesdash />}></Route> 
       <Route path="/Loancal" element={<LoanDash />}></Route> 
       <Route path='/userDetails'element={<userDetails />}></Route>
+
     </Routes>
 
 
