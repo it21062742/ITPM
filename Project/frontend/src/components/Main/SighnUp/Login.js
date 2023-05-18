@@ -4,11 +4,39 @@ functionality. */
 import React, { Component, useState } from "react";
 import Link from '@mui/material/Link';
 
-
-
-import axios from "axios";
-
 export default function LoginPage() {  
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+  
+	function handleSubmit(e) {
+	  e.preventDefault();
+  
+	  console.log(email, password);
+	  fetch("http://localhost:5000/login-user", {
+		method: "POST",
+		crossDomain: true,
+		headers: {
+		  "Content-Type": "application/json",
+		  Accept: "application/json",
+		  "Access-Control-Allow-Origin": "*",
+		},
+		body: JSON.stringify({
+		  email,
+		  password,
+		}),
+	  })
+		.then((res) => res.json())
+		.then((data) => {
+		  console.log(data, "userRegister");
+		  if (data.status == "ok") {
+			alert("login successful");
+			window.localStorage.setItem("token", data.data);
+			window.localStorage.setItem("loggedIn", true);
+  
+			window.location.href = "./userDetails";
+		  }
+		});
+	}
 
 	return (
     <div class="h-screen md:flex">
@@ -25,7 +53,7 @@ export default function LoginPage() {
 		<div class="absolute -top-20 -right-20 w-80 h-80 border-4 rounded-full border-opacity-30 border-t-8"></div>
 	</div>
 	<div class="flex md:w-1/2 justify-center py-10 items-center bg-white">
-		<form class="bg-white">
+		<form class="bg-white" onSubmit={handleSubmit}>
 			<h1 class="text-gray-800 font-bold text-2xl mb-1">Sign In</h1><br></br>
 			<div class="flex items-center border-2 py-2 px-3 rounded-2xl mb-4">
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
@@ -33,16 +61,22 @@ export default function LoginPage() {
 					<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z"
 						clip-rule="evenodd" />
 				</svg>
-				<input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="User name" />
+				<input class="pl-2 outline-none border-none" type="email"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+            />
       </div>
 						<div class="flex items-center border-2 py-2 px-3 rounded-2xl">
-							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20"
-								fill="currentColor">
+							<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor">
 								<path fill-rule="evenodd"
 									d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
 									clip-rule="evenodd" />
 							</svg>
-							<input class="pl-2 outline-none border-none" type="text" name="" id="" placeholder="Password" />
+							<input class="pl-2 outline-none border-none" type="password"
+              className="form-control"
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+            />
       </div>
 							<button type="submit" class="block w-full bg-indigo-600 mt-4 py-2 rounded-2xl text-white font-semibold mb-2">Login</button>
       <div><br></br>

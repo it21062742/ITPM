@@ -27,6 +27,7 @@ mongoose
   .catch((e) => console.log(e));
 
 require("./userDetails");
+require("./imageDetails");
 
 const User = mongoose.model("UserInfo");
 const Images = mongoose.model("ImageDetails");

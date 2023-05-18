@@ -25,6 +25,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { useState } from "react";
+import { Radio } from '@mui/material';
 
 function Copyright(props) {
   return (
@@ -42,40 +43,54 @@ function Copyright(props) {
 const theme = createTheme();
 
 export default function SignUp() {
-  const [name, setName] = useState("");
+  const [fname, setFname] = useState("");
+  const [lname, setLname] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [userType, setUserType] = useState("");
+  const [secretKey, setSecretKey] = useState("");
 
   const handleSubmit = (e) => {
-    e.preventDefault();
+    if (userType == "Admin" && secretKey != "1234") {
+      e.preventDefault();
+      alert("Invalid Admin");
+    } else {
+      e.preventDefault();
+      if(email === "" || password === "") {
+        e.preventDefault();
+        alert("Please check the email address and password");
+      } else {
+        e.preventDefault();}
 
-    // Create an object with the form data
-    const userData = {
-      name,
-      email,
-      password,
-    };
-
-    // Send the user data to the backend
-    fetch("/api/users/register", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(userData),
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        // Handle the response from the server
-        console.log(data);
-        // Redirect or display a success message to the user
+      console.log(fname, lname, email, password);
+      fetch("http://localhost:5000/register", {
+        method: "POST",
+        crossDomain: true,
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          "Access-Control-Allow-Origin": "*",
+        },
+        body: JSON.stringify({
+          fname,
+          email,
+          lname,
+          password,
+          userType,
+        }),
       })
-      .catch((error) => {
-        // Handle any errors
-        console.error("Error:", error);
-      });
+        .then((res) => res.json())
+        .then((data) => {
+          console.log(data, "userRegister");
+          if (data.status == "ok") {
+            alert("Registration Successful");
+          } else {
+            alert("Something went wrong");
+          }
+        });
+    }
   };
+
   
   return (
     <ThemeProvider theme={theme}>
@@ -96,33 +111,44 @@ export default function SignUp() {
             Sign up
           </Typography>
           <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+              
             <Grid container spacing={2}>
-              <Grid item xs={12}>
+              <Grid item xs={12} sm={6}>
                 <TextField
                   autoComplete="given-name"
                   name="firstName"
                   required
                   fullWidth
-                  id="name"
-                  label="Name"
+                  id="firstName"
+                  label="First Name"
                   autoFocus
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
+                  onChange={(e) => setFname(e.target.value)}
+                />
+              </Grid>
+              <Grid item xs={12} sm={6}>
+                <TextField
+                  required
+                  fullWidth
+                  id="lastName"
+                  label="Last Name"
+                  name="lastName"
+                  autoComplete="family-name"
+                  onChange={(e) => setLname(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
-                  id="email"
-                  label="Email Address"
                   name="email"
+                  label="email"
+                  type="email"
+                  id="email"
                   autoComplete="email"
                   value={email}
-                  onChange={(e) => setEmail(e.target.value)}
+              onChange={(e) => setEmail(e.target.value)}
                 />
-              </Grid>
-              <Grid item xs={12}>
+              </Grid><Grid item xs={12}>
                 <TextField
                   required
                   fullWidth
@@ -132,30 +158,19 @@ export default function SignUp() {
                   id="password"
                   autoComplete="new-password"
                   value={password}
-            onChange={(e) => setPassword(e.target.value)}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  required
-                  fullWidth
-                  name="confirmPassword"
-                  label="confirmPassword"
-                  type="password"
-                  id="confirmPassword"
-                  autoComplete="new-password"
-                  value={confirmPassword}
-                  onChange={(e) => setConfirmPassword(e.target.value)}
-                
+                  onChange={(e) => setPassword(e.target.value)}
                 />
               </Grid>
               <Grid item xs={12}>
                 <FormControlLabel
-                  control={<Checkbox value="allowExtraEmails" color="primary" />}
+                  control={<Radio value="allowExtraEmails" color="primary" />}
                   label="I want to receive inspiration, marketing promotions and updates via email."
                 />
               </Grid>
             </Grid>
+            <Grid>
+           
+          </Grid>
             <Button
               type="submit"
               fullWidth
