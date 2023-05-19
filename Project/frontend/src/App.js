@@ -5,9 +5,10 @@ import ArticlePage from "./components/User/Articles/Articles";
 import Articlesdash from "./components/User/Articles/Articlesdash";
 import LoanDash from "./components/User/HouseLoan/LoanDash";
 import LeaseDash from "./components/User/VehicleLease/LeaseDash";
-import UserDetails from "./components/User/userDetails";
 import HomePage from "./components/Main/LandingPage/HomePage";
 import UserHomePage from "./components/User/HomePage/UserHomePage";
+import UserDetails from "./components/Main/SighnUp/userDetails";
+import AdminHome from "./components/Admin/adminHome";
 
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
@@ -18,13 +19,9 @@ function App() {
 			<Routes>
 				<Route
 					exact
-					path="/"
+					path="/login"
 					element={
-						isLoggedIn == "true" ? (
-							<UserDetails />
-						) : (
-							<UserHomePage />
-						)
+						isLoggedIn == "true" ? <UserDetails /> : <LoginPage />
 					}
 				/>
 				<Route path="/" element={<HomePage />}></Route>
@@ -35,7 +32,8 @@ function App() {
 				<Route path="/Articles" element={<Articlesdash />}></Route>
 				<Route path="/Loancal" element={<LoanDash />}></Route>
 				<Route path="/Leasecal" element={<LeaseDash />}></Route>
-				<Route path="/userDetails" element={<userDetails />}></Route>
+				<Route path="/Home" element={<userDetails />}></Route>
+				<Route path="/AdminHome" element={<AdminHome />}></Route>
 			</Routes>
 		</Router>
 	);

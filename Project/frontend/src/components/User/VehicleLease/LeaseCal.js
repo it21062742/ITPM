@@ -281,7 +281,7 @@ export default function LeaseCalculator() {
 			</div>
 			{installments.length > 0 && (
 				<>
-					<h3>Lease Payment vs Lease Remainder</h3>
+					<h3>Lease Installments</h3>
 					<div className="loan-download-container">
 						<PDFDownloadLink
 							document={

@@ -70,7 +70,7 @@ const Drawer = styled(MuiDrawer, {
 // TODO remove, this demo shouldn't need to reset the theme.
 const defaultTheme = createTheme();
 
-export default function Articlesdash() {
+export default function UsetHomePage() {
 	const [open, setOpen] = React.useState(true);
 	const toggleDrawer = () => {
 		setOpen(!open);

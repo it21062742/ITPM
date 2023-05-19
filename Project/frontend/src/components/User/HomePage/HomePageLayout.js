@@ -36,7 +36,7 @@ const cards = [
 
 const theme = createTheme();
 
-export default function Album() {
+export default function HomePageLayout() {
 	const handleViewClick = (buttonLink) => {
 		window.location.href = buttonLink;
 	};

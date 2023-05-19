@@ -34,15 +34,10 @@ export const mainListItems = (
 				<ListItemText primary="Lease calculate" />
 			</ListItemButton>
 		</Link>
-		<Link to="/EduCal" style={{ textDecoration: "none", color: "inherit" }}>
-			<ListItemButton>
-				<ListItemIcon>
-					<CalculateIcon />
-				</ListItemIcon>
-				<ListItemText primary="Education loan calculator" />
-			</ListItemButton>
-		</Link>
-		<Link to="/1" style={{ textDecoration: "none", color: "inherit" }}>
+		<Link
+			to="/Articles"
+			style={{ textDecoration: "none", color: "inherit" }}
+		>
 			<ListItemButton>
 				<ListItemIcon>
 					<NewspaperIcon />
