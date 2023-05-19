@@ -6,11 +6,9 @@ const LeaseComparison = () => {
 			<span
 				style={{ float: "right", marginTop: "-21px", fontSize: "11px" }}
 			>
-				Updated On: 3rd October 2022
+				Updated On: 20 May 2023
 			</span>
-			<h2 className="undlne">
-				Compare Vehicle Leasing Rates in Sri Lanka
-			</h2>
+			<h3>Compare Vehicle Leasing Rates in Sri Lanka</h3>
 			<div></div>
 			<table
 				className="table table-striped table-bordered"

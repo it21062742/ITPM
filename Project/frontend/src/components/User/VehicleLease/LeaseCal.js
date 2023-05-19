@@ -77,8 +77,8 @@ const styles = StyleSheet.create({
  */
 export default function LeaseCalculator() {
 	const [values, setValues] = useState({
-		"loan-amount": 1000,
-		"loan-term": 0.5,
+		"lease-amount": 1000,
+		"lease-term": 0.5,
 		"interest-rate": 3,
 	});
 	const [installments, setInstallments] = useState([]);
@@ -97,8 +97,8 @@ export default function LeaseCalculator() {
 		event.preventDefault();
 
 		calculate(
-			values["loan-amount"],
-			values["loan-term"],
+			values["lease-amount"],
+			values["lease-term"],
 			values["interest-rate"]
 		);
 	};
@@ -221,18 +221,18 @@ export default function LeaseCalculator() {
 
 	return (
 		<div className="loan-calculator-container">
-			<h1>Loan Calculator</h1>
+			<h1>Lease Calculator</h1>
 
 			<div className="flex-container">
 				<form onSubmit={handleSubmit}>
 					<div className="form-item">
-						<label htmlFor="loan-amount">Loan Amount</label>
+						<label htmlFor="lease-amount">Lease Amount</label>
 						<div className="form-input">
 							<input
 								type="number"
-								name="loan-amount"
+								name="lease-amount"
 								placeholder="0"
-								value={values["loan-amount"]}
+								value={values["lease-amount"]}
 								onChange={handleInputChange}
 							/>
 						</div>
@@ -250,13 +250,13 @@ export default function LeaseCalculator() {
 						</div>
 					</div>
 					<div className="form-item">
-						<label htmlFor="loan-term">Loan Term (Years)</label>
+						<label htmlFor="lease-term">Lease Term (Years)</label>
 						<div className="form-input">
 							<input
 								type="number"
-								name="loan-term"
+								name="lease-term"
 								placeholder="0"
-								value={values["loan-term"]}
+								value={values["lease-term"]}
 								onChange={handleInputChange}
 								required
 							/>
@@ -270,21 +270,25 @@ export default function LeaseCalculator() {
 						></input>
 					</div>
 				</form>
+
 				{installments.length > 0 && (
 					<div className="chart-container">
+						<h3>Lease Payment vs Lease Remainder</h3>
+
 						<Line data={chartData} options={chartOptions} />
 					</div>
 				)}
 			</div>
 			{installments.length > 0 && (
 				<>
+					<h3>Lease Payment vs Lease Remainder</h3>
 					<div className="loan-download-container">
 						<PDFDownloadLink
 							document={
 								<Document>
 									<Page size="A4" style={styles.page}>
 										<Text style={styles.header}>
-											Loan Installments
+											Lease Installments
 										</Text>
 										<View style={styles.chartContainer}>
 											<Line
@@ -296,22 +300,19 @@ export default function LeaseCalculator() {
 									</Page>
 								</Document>
 							}
-							fileName="loan_installments.pdf"
+							fileName="lease_installments.pdf"
 							ref={pdfRef}
 						>
 							{({ blob, url, loading, error }) =>
-								loading ? "Loading document..." : "Download PDF"
+								loading
+									? "Loading document..."
+									: "(Download Table PDF)"
 							}
 						</PDFDownloadLink>
 					</div>
 					{renderTable()}
 				</>
 			)}
-			{/* <div className="external-html-container">
-        <iframe src="./loan.html" width="100%" height="auto"  title="External HTML" />
-      </div> */}
-			{/* <iframe src={pref}></iframe> */}
-			{/* <div className="external-html-container" dangerouslySetInnerHTML={{ pref }} />   */}
 			{<LeaseComparison />}
 		</div>
 	);
