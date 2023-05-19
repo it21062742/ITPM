@@ -3,8 +3,8 @@ import LoginPage from "./components/Main/SighnUp/Login.js";
 import SighnUpPage from "./components/Main/SighnUp/SignUp";
 import ArticlePage from "./components/User/Articles/Articles";
 import Articlesdash from "./components/User/Articles/Articlesdash";
-import LoanCal from "./components/User/HouseLoan/loancal";
 import LoanDash from "./components/User/HouseLoan/LoanDash";
+import LeaseDash from "./components/User/VehicleLease/LeaseDash";
 import UserDetails from "./components/User/userDetails";
 import HomePage from "./components/Main/LandingPage/HomePage";
 import UserHomePage from "./components/User/HomePage/UserHomePage";
@@ -34,6 +34,7 @@ function App() {
 				<Route path="/Home" element={<UserHomePage />}></Route>
 				<Route path="/Articles" element={<Articlesdash />}></Route>
 				<Route path="/Loancal" element={<LoanDash />}></Route>
+				<Route path="/Leasecal" element={<LeaseDash />}></Route>
 				<Route path="/userDetails" element={<userDetails />}></Route>
 			</Routes>
 		</Router>
