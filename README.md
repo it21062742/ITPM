@@ -1,15 +1,6 @@
-### [accountill.com](https://accountill.com/)
+
 # MERN Stack Invoicing Application
-Built with the MERN stack (MongoDB, Express, React and NodeJS).
-![Invoice](https://res.cloudinary.com/almpo/image/upload/v1637311386/invoice/invoice-app_tcz0dj.png)
 
-
-## Update
-I am pleased to inform you that the name of this repository has been changed from Arc Invoice to Accountill.
-There are so many things coming! Stay tuned!!
-
-
-Panshak
 ----
 
   * [Introduction](#introduction)
@@ -19,7 +10,6 @@ Panshak
       - [Server](#server)
       - [Database](#database)
   * [Configuration and Setup](#configuration-and-setup)
-  * [Troubleshooting](#troubleshooting)
   * [Author](#author)
   * [License](#license)
 
