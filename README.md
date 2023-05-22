@@ -1,5 +1,5 @@
 
-# MERN Stack Invoicing Application
+# MERN Stack Financia assistant Application
 
 ----
 
@@ -27,7 +27,6 @@ This is a project crated for the ITPM module. A full stack Finance manager appli
 This project was created using the following technologies.
 
 #### Client
-
 - React JS
 - Redux (for managing and centralizing application state)
 - React-router-dom (To handle routing)
@@ -36,7 +35,6 @@ This project was created using the following technologies.
 - 
 
 #### Server
-
 - Express
 - Mongoose
 - JWT (For authentication)
@@ -58,7 +56,7 @@ $ cd client
 $ npm install (to install client-side dependencies)
 $ npm start (to start the client)
 
-In the second terminal
+
 - cd server and create a .env file in the root of your server directory.
 - Supply the following credentials
 
@@ -69,6 +67,7 @@ MONGO_URL=
 
 Please follow [This tutorial](https://dev.to/dalalrohit/how-to-connect-to-mongodb-atlas-using-node-js-k9i) to create your mongoDB connection url, which you'll use as your MONGO_URL
 
+In the second terminal
 ```
 $ cd server
 $ npm install (to install server-side dependencies)
@@ -80,8 +79,7 @@ $ npm install (to install server-side dependencies)
 
 # Batch - IT.S3.WE.01.02
 # Group - GRP_120
-### Group Leader - IT21062742 - Weerasinghe D.J.A.H (IT21062742)
-### Member 2 - IT21002724 - Caldera H.G.S (IT21002724)
+## Group Leader - IT21062742 - Weerasinghe D.J.A.H (IT21062742)
 
 ## License
 
